@@ -3,43 +3,45 @@
 var counter = 0;
 
 //constructor function
-function Image (name, path, clicks) {
+function Image (name, path) {
   this.name = name;
   this.path = path;
-  this.clicks= clicks;
+  this.selection = 0;
 }
 
-Image.prototype.clicked = function () {
-  var click = 0;
-  click++;
-  console.log('click: ' + click);
+//this is our interior click counter
+Image.prototype.selected = function () {
+  var timesSelected = 0;
+  timesSelected++;
+  console.log('Times selected: ' + timesSelected);
 };
 
-// Image.prototype.random = function () {
-//   var randomImgPicker = Math.floor(Math.random()*19 +1);
-//   return randomImgPicker;
-// }
+//A thing that gives a number between 1 and 20
+Image.prototype.random = function () {
+  var randomImgPicker = Math.floor(Math.random()*19 +1);
+  return randomImgPicker;
+}
 
 //make the images
-var banana = new Image ('banana', './img/banana.jpg', 0);
-var boot = new Image ('boots', './img/boots.jpg', 0);
-var bag = new Image ('bag', './img/bag.jpg', 0);
-var breakfast = new Image ('breakfast', './img/breakfast.jpg', 0);
-var bubblegum = new Image ('bubblgum', './img/bubblegum.jpg', 0);
-var chair = new Image ('chair', './img/chair.jpg', 0);
-var cthulhu = new Image ('cthulhu', './img/cthulhu.jpg', 0);
-var dogduck = new Image ('dog duck', './img/dog-duck.jpg', 0);
-var dragon = new Image ('dragon', './img/dragon.jpg', 0);
-var pen = new Image ('pen', './img/pen.jpg', 0);
-var petsweep = new Image ('petsweep', './img/pet-sweep.jpg', 0);
-var scissors = new Image ('scissors', './img/scissors.jpg', 0);
-var shark = new Image ('shark', './img/shark.jpg', 0);
-var sweep = new Image ('sweep', './img/sweep.png', 0);
-var tauntaun = new Image ('taun taun bag', './img/tauntaun.jpg', 0);
-var unicorn = new Image ('unicorn', './img/unicorn.jpg', 0);
-var usb = new Image ('usb', './img/usb.gif', 0);
-var watercan = new Image ('watercan', './img/water-can.jpg', 0);
-var wineglass = new Image ('wineglass', './img/wine-glass.jpg', 0);
+var banana = new Image ('banana', './img/banana.jpg');
+var boot = new Image ('boots', './img/boots.jpg');
+var bag = new Image ('bag', './img/bag.jpg');
+var breakfast = new Image ('breakfast', './img/breakfast.jpg');
+var bubblegum = new Image ('bubblgum', './img/bubblegum.jpg');
+var chair = new Image ('chair', './img/chair.jpg');
+var cthulhu = new Image ('cthulhu', './img/cthulhu.jpg');
+var dogduck = new Image ('dog duck', './img/dog-duck.jpg');
+var dragon = new Image ('dragon', './img/dragon.jpg');
+var pen = new Image ('pen', './img/pen.jpg');
+var petsweep = new Image ('petsweep', './img/pet-sweep.jpg');
+var scissors = new Image ('scissors', './img/scissors.jpg');
+var shark = new Image ('shark', './img/shark.jpg');
+var sweep = new Image ('sweep', './img/sweep.png');
+var tauntaun = new Image ('taun taun bag', './img/tauntaun.jpg');
+var unicorn = new Image ('unicorn', './img/unicorn.jpg');
+var usb = new Image ('usb', './img/usb.gif');
+var watercan = new Image ('watercan', './img/water-can.jpg');
+var wineglass = new Image ('wineglass', './img/wine-glass.jpg');
 
 //I think we could probably make the image maker constructor use a function - like name = path.split(.jpg)[0]
 
@@ -49,8 +51,36 @@ var imgs = [banana, boot, bag, breakfast, bubblegum, chair, cthulhu, dogduck, dr
 //an array for used images
 var justChosen = [];
 
+Image.prototype.clickit = function () {
+  //grab stuff from DOM
+  var imgInDom = document.getElementsByClassName('pic');
+  //apply an event listener
+  imgInDom.addEventListener('click', function () {
+    //count one
+    this.selected();
 
 
+    var srcAttribute = this.getAttribute('src');
+    //give us the name
+    var nameOfChosen = srcAttribute.split('.')[0];
+    //push the selected into justChosen array
+    justChosen.push(nameOfChosen);
+  }
+}
+
+
+
+
+//
+// for (var i = 0; i < ??; i++) {
+//   var changeImage = document.getElementsByClassName('pic').innerHTML
+//   //it can't be justChosen or it's two neighbors
+//
+// if justChosen[i] === imgs[i] {
+// //replace innerHTML of pic to a new imgs[i]
+// } else {
+//
+// }
 
 // Image.prototype.eventHandler = function () {
 //
