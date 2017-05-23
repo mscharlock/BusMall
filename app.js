@@ -7,6 +7,8 @@ var counter = 0;
 var justChosen = [];
 //an array for images we are displaying Now
 var chosenNow = [];
+//an array for the total tally of clicks on each image
+var clickTotals = [];
 //an array to hold all the images after they're created
 //there is probably a better way to do this one too...something like push this.name into var img = []
 var imgs = [banana, boot, bag, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass];
@@ -46,192 +48,49 @@ Image.prototype.clicked = function () {
   var timesSelected = 0;
   timesSelected++;
   console.log('Times selected: ' + timesSelected);
-}
+};
+
+//on each image, have an event listener where it logs clicks
+Image.prototype.eventHandler = function ()
+.addEventListener('click', function () {
+  //count one
+  this.clicked();
+  console.log('clicks: ' + this.clicked);
+});
+
+//Our for loop to count the 25 global clicks - right now it is not hooked up to anything
+Image.prototype.globalClicks = function () {
+  for (var i = 0; i < 25; i++) {
+    counter++;
+  }
+};
 
 //A thing that gives a number between 1 and 18
 function pick() {
   var randomImgPicker = Math.floor(Math.random()*17 +1);
-  return randomImgPicker;
+  return randomImgPicker; //why is this return not working?
 }
-pick(); //tested: pick is working
+
+pick();
 
 
 //when you click, we want a new image to appear
-Image.prototype.appearinDom = function () {
+function appearinDom () {
   //grab stuff from DOM
-  var imgInDom = document.getElementsByClassName('pic');
+  var placehold = document.getElementsByClassName('pic');
   //put some stuff in the dom: first cycle through
-  for (var i = 0; i < imgs.length; i++) { //loop through images
-    var oneRandomImage = imgs[pick()]; //making a variable for our randomized image
-    console.log(oneRandomImage);
-  }};
-    pic.innerHTML = oneRandomImage; //put the random image in the inner HTML of pic
-    pic.appendChild(oneRandomImage); //append that to the DOM
+  var oneRandomImage = imgs[pick()]; //making a variable for our randomized image
+  placehold.innerHTML = oneRandomImage; //put the random image in the inner HTML of pic
+  placehold.appendChild(oneRandomImage); //append that to the DOM
+}
+
+appearinDom();
+
+//a function that pushes the totals of clicks on all images into an array
+function displayClicksPerImage () {
+  for (var i = 0; i < imgs.length; i++){
+    clickTotals.push(imgs[i].selected);
+    console.log(imgs[i] + 'Total times this image was clicked: ' + 'imgs[i].selected');
   }
-//
-//
-// //fix this
-// Image.prototype.addtoDom = function () {
-//   imgInDom.addEventListener('click', function () {
-//     //count one
-//     this.clicked();
-//     console.log('clicks: ' + this.clicked);
-//   })
-    // push a picture (using randomizer) into innerHTML of pic
-    // something like document.innerHTML = imgs[random()]
-
-
-//Make this it's own function
-//give us the name of the picture we just pushed in?
-//     var srcAttribute = this.getAttribute('src');
-// //split that by . so we can get the path
-//     var nameOfChosen = srcAttribute.split('.')[0];
-// //push the selected into justChosen array
-//     justChosen.push(nameOfChosen);
-//   }
-// }
-
-// for (var i = 0; i < 25, i++) {
-  //do something here with clicks
-//prototype image method that says if you click, count one
-
-
-
-
-//
-// for (var i = 0; i < ??; i++) {
-//   var changeImage = document.getElementsByClassName('pic').innerHTML
-//   //it can't be justChosen or it's two neighbors
-//
-// if justChosen[i] === imgs[i] {
-// //replace innerHTML of pic to a new imgs[i]
-// } else {
-//
-// }
-
-// Image.prototype.eventHandler = function () {
-//
-// function click1 () {
-//   var imgPic1 = document.getElementById('pic1');
-//   imgPic1.addEventListener('click', function() {
-//     imgs[0].clicks++;
-//     var randomImgPicker = Math.floor(Math.random()*5 +1);
-//     console.log('clicked1 ' + randomImgPicker + ' clicks: '+ imgs[0].clicks);
-//     justChosen.push(imgs[0]);
-//   }
-// );
-// }
-//
-// function click2 () {
-//   var imgPic2 = document.getElementById('pic2');
-//   imgPic2.addEventListener('click', function() {
-//     imgs[1].clicks++;
-//     var randomImgPicker = Math.floor(Math.random()*5 +1);
-//     console.log('clicked2 ' + randomImgPicker + ' clicks: ' + imgs[1].clicks);
-//     justChosen.push(imgs[1]);
-//   }
-// );
-// }
-//
-// function click3 () {
-//   var imgPic3 = document.getElementById('pic3');
-//   imgPic3.addEventListener('click', function() {
-//     imgs[2].clicks++;
-//     var randomImgPicker = Math.floor(Math.random()*5 +1);
-//     console.log('clicked3 ' + randomImgPicker + ' clicks: ' + imgs[2].clicks);
-//     justChosen.push(imgs[2]);
-//   }
-// );
-// }
-//
-// click1();
-// click2();
-// click3();
-//
-// justChosen;
-
-    // var srcAttr = this.getAttribute('src');
-    // console.log(srcAttr.split('./img/'[1]));
-
-    //
-    // function getSize() {
-    //   var img = document.getElementById('test-img');
-    //   img.addEventListener('click', function() {
-    //     var srcAttr = this.getAttribute('src');
-    //     console.log(srcAttr.split('.it/')[1]);
-    //   });
-    // }
-    //
-    // getSize();
-//
-// banana.eventHandler();
-
-//
-// function getSize() {
-//   var img = document.getElementById('test-img');
-//   img.addEventListener('click', function() {
-//     var srcAttr = this.getAttribute('src');
-//     console.log(srcAttr.split('.it/')[1]);
-//   });
-// }
-
-//
-// //add an event listener
-// pic1.addEventListener('click', function(){
-//   console.log('my image type: ', this.getAttribute('src'));
-//   counter++;
-//
-//   console.log('counter' , counter);
-// })
-
-//
-//   document.getElementById('test-img');
-//     img.addEventListener('click', function() {
-//       var srcAttr = this.getAttribute('src');
-//       console.log(srcAttr.split('.it/')[1]);
-//     });
-//   }var dog = document.getElementById('dog');
-//
-// dog.addEventListener('click', function() {
-//   console.log('my image type:', this.getAttribute('src'));
-//   counter++;
-//
-//   console.log('counter', counter);
-// });
-//
-//
-//
-//
-// dog.addEventListener('click', function() {
-//   console.log('my image type:', this.getAttribute('src'));
-//   counter++;
-//
-//   console.log('counter', counter);
-// })
-// }
-
-
-
-
-
-
-
-//our random image: imgs[i].random
-
-//
-// this.Image.totalClicks() {
-//
-// }
-//
-// //shown method
-// this.Image.shown () {
-//   //method
-// }
-//
-// //image randomizer
-// Math.floor(Math.random()*19+1)
-// //when you click, log the click
-//
-// //when you click, show new set of 3 randoms
-//
-// //listen for the click
+}
+// } //Note to self: I need to test this piece to see if it works, but I can't do that until we get a working click thing going
