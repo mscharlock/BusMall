@@ -1,5 +1,4 @@
-main > ol > li {
+img {
+  width: 200px;
   float: left;
-  margin: 10px;
-  list-style-type: none;
 }
