@@ -51,8 +51,6 @@ ImageBuilder.prototype.clicks = function () {
 };
 
 
-var imgsToTheClicks = [];
-
 //on each ImageBuilder, have an event listener where it logs clicks
 function action() {
   var container = document.getElementById('container').childNodes;
@@ -66,7 +64,6 @@ function action() {
       for (var j = 0; j < imgs.length; j++) {
         if (imgs[j].name === targetId) {
           imgs[j].clicks();
-          imgsToTheClicks.push(imgs[j].clicks());
           console.log(imgs[j]);
         }
       }
@@ -189,7 +186,11 @@ function appearOnPage () {
 appearOnPage();
 action();
 
-console.log(imgsToTheClicks);
+
+//this stuff has to come after we have cycled through the 25 times
+var clickNumbers = [banana.clicked, boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
+// , 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass']
+
 
 var ctx = document.getElementById('chart').getContext('2d');
 
