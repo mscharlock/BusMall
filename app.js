@@ -185,3 +185,19 @@ function appearOnPage () {
 
 appearOnPage();
 action();
+
+var ctx = document.getElementById('chart').getContext('2d');
+
+var myPieChart = new Chart(ctx,{
+  type: 'pie',
+  data: {
+    labels: ['cats', 'dogs', 'fish', 'plants'],
+    datasets: [{
+      label: 'How many were there?',
+      data: [15, 22, 12, 5],
+      backgroundColor: ['#EE3B3B', '#CD9B9B', '#FF7D40', '#A02422']
+    }],
+    options: { },
+  }
+}
+);
