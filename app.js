@@ -6,7 +6,7 @@ var counter = 0;
 //an array for used ImageBuilders
 var justChosen = [];
 //an array for ImageBuilders we are displaying Now
-var chosenNow = [];
+// var chosenNow = [];
 //an array for the total tally of clicks on each ImageBuilder
 var clickTotals = [];
 
@@ -51,37 +51,82 @@ ImageBuilder.prototype.clicks = function () {
 };
 
 //on each ImageBuilder, have an event listener where it logs clicks
-ImageBuilder.prototype.action = function () {
-  var name = this.name;
-  document.getElementId(name).addEventListener('click', function () {
-    this.clicks();
-  })
+function action() {
+  var container = document.getElementById('container').childNodes;
+  console.log(container, container.length);
+
+  for (var i = 0; i < container.length; i++){
+    console.log(container[i])
+    container[i].addEventListener('click', function (event) {
+      console.log(event.target.id);
+      var targetId = event.target.id;
+      for (var j = 0; j < imgs.length; j++) {
+        if (imgs[j].name === targetId) {
+          imgs[j].clicks();
+          console.log(imgs[j]);
+        }
+      }
+      clearPage();
+      appearOnPage();
+      action();
+    })
+  }
 }
+
+function clearPage () {
+  var container = document.getElementById('container');
+  container.innerHTML = '';
+}
+
 
 //get three random images in the chosenNow array
 function getThree () {
-  for (var i = 0; i < 3; i++) {
-    chosenNow.push(imgs[Math.floor(Math.random()*17 +1)]);
+  var prevImages = chosenNow;
+  var chosenNow = [];
+  var randomIndexes = []
+  //we're comparing numbers, not the objects
+  while (randomIndexes.length < 3) {
+    var randomNumber = Math.floor(Math.random() * imgs.length);
+
+    if (randomNumber !== randomIndexes[0] || randomNumber !== randomIndexes[1] || randomNumber !== randomIndexes[2]) {
+      randomIndexes.push(randomNumber)
+      chosenNow.push(imgs[randomNumber]);
+      console.log('random number: ' + randomNumber);
+      console.log(chosenNow)
+    }
   }
+  console.log('chosenNow: ' + chosenNow[0]);
+  return chosenNow
+  console.log('prevImages: ' + prevImages);
 }
 
 //make images appear
 function appearOnPage () {
-  for (var i = 0; i < 3; i++) {
-    var leftPic = document.createElement('img');
-    var midPic = document.createElement('img');
-    var rightPic = document.createElement('img');
+  var imagesToShow = getThree()
+  var leftPic = document.createElement('img');
+  var midPic = document.createElement('img');
+  var rightPic = document.createElement('img');
 
-    leftPic.setAttribute('src', chosenNow[0].path);
-    rightPic.setAttribute('src', chosenNow[1].path);
-    midPic.setAttribute('src', chosenNow[2].path);
+  leftPic.setAttribute('src', imagesToShow[0].path);
+  rightPic.setAttribute('src', imagesToShow[1].path);
+  midPic.setAttribute('src', imagesToShow[2].path);
+  console.log(imagesToShow)
+  leftPic.setAttribute('id', imagesToShow[0].name);
+  rightPic.setAttribute('id', imagesToShow[1].name);
+  midPic.setAttribute('id', imagesToShow[2].name);
 
-    var grabContainer = document.getElementById('container');
-    grabContainer.innerHTML = [leftPic, midPic, rightPic];
+  var grabContainer = document.getElementById('container');
+  // grabContainer.innerHTML = leftPic, midPic, rightPic;
+  grabContainer.appendChild(leftPic);
+  grabContainer.appendChild(rightPic);
+  grabContainer.appendChild(midPic);
   }
+  console.log(imgs)
 
 
-//after the images appear, I want to get rid of them when they are chosen 
+
+
+//after the images appear, I want to get rid of them when they are chosen
 
 
 
@@ -135,3 +180,8 @@ function appearOnPage () {
 //     counter++;
 //   }
 // };
+
+//Initiation of the game on page load
+
+appearOnPage();
+action();
