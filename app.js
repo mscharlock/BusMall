@@ -1,15 +1,7 @@
 'use strict';
 //Global variables
-
-//Global counter
 var counter = 0;
-//an array for used ImageBuilders
 var justChosen = [];
-//an array for ImageBuilders we are displaying Now
-// var chosenNow = [];
-//an array for the total tally of clicks on each ImageBuilder
-var clickTotals = [];
-
 
 //constructor function
 function ImageBuilder(name, path) {
@@ -50,14 +42,14 @@ ImageBuilder.prototype.clicks = function () {
   console.log('Times selected: ' + this.clicked);
 };
 
-
+//WORKING
 //on each ImageBuilder, have an event listener where it logs clicks
-function action() {
+function clickingCount() {
   var container = document.getElementById('container').childNodes;
   console.log(container, container.length);
 
   for (var i = 0; i < container.length; i++){
-    console.log(container[i])
+    console.log(container[i]);
     container[i].addEventListener('click', function (event) {
       console.log(event.target.id);
       var targetId = event.target.id;
@@ -67,10 +59,10 @@ function action() {
           console.log(imgs[j]);
         }
       }
-      clearPage();
-      appearOnPage();
-      action();
-    })
+      // clearPage();
+      // appearOnPage();
+      // clickingCount();
+    });
   }
 }
 
@@ -79,31 +71,96 @@ function clearPage () {
   container.innerHTML = '';
 }
 
+var prevImages = [];
+var chosenNow = [];
+
+//WORKING
+function randomNumber () {
+  var num = Math.floor(Math.random() * imgs.length);
+  return num;
+}
+
+var randomIndexes = [];
+
+function getThree () {
+  counter++;
+  console.log('counter: ' + counter);
+  if (randomIndexes.length < 3) {
+    var integer = randomNumber();
+    chosenNow.push(integer);
+    prevImages.push(chosenNow);
+  }
+  console.log('prevImages: ' + prevImages);
+  console.log('chosen now:' + chosenNow);
+}
+//
+// clearPage();
+//
+// function getThreeMore () {
+//   counter++;
+//   randomIndexes = [];
+//   if (randomIndexes.length < 3 && randomIndexes.includes(chosenNow) = false) {
+//     chosenNow.length = 0;
+//     chosenNow.push(randomNumber);
+//   }
+// }
+//
 
 //get three random images in the chosenNow array
-function getThree () {
-  var prevImages = chosenNow;
-  var chosenNow = [];
-  var randomIndexes = []
-  //we're comparing numbers, not the objects
-  while (randomIndexes.length < 3) {
-    var randomNumber = Math.floor(Math.random() * imgs.length);
+// function getThree () {
+//   var prevImages = chosenNow;
+//   var chosenNow = [];
+//   var randomIndexes = [];
+//   counter++;
+//   //we're comparing numbers, not the objects
+//   while (randomIndexes.length < 3 && counter <= 25) {
+//     var randomNumber = Math.floor(Math.random() * imgs.length);
+//
+//     if (randomNumber !== randomIndexes[0] && randomNumber !== randomIndexes[1] && randomNumber !== randomIndexes[2]) {
+//       chosenNow.push(imgs[randomNumber]);
+//
+//
+//
+//       arr.includes(searchElement)
+//     )
+//     //clear and reset
+//     //in this new set, are any the same as chosenNow?
+//     prevImages.push(chosenNow);
+//     }
+//   }
+//
+// clearPage();
 
-    if (randomNumber !== randomIndexes[0] || randomNumber !== randomIndexes[1] || randomNumber !== randomIndexes[2]) {
-      randomIndexes.push(randomNumber)
-      chosenNow.push(imgs[randomNumber]);
-      console.log('random number: ' + randomNumber);
-      console.log(chosenNow)
-    }
-  }
-  console.log('chosenNow: ' + chosenNow[0]);
-  return chosenNow
-  console.log('prevImages: ' + prevImages);
-}
+//compare the prev with three new random numbers
+// function getThreeNotPrev () {
+
+//use the random numbers to generate images
+
+
+
+//
+//   function getRight () {
+//     var chosenNow = [];
+//     var randomIndexes = [
+//   }
+//
+//
+//
+//     && randomNumber !== prevImages[0]) {
+//       randomIndexes.push(randomNumber);
+//       chosenNow.push(imgs[randomNumber]);
+//       console.log('random number: ' + randomNumber);
+//       console.log(chosenNow);
+//
+//     }
+//   }
+//   console.log('chosenNow: ' + chosenNow[0]);
+//   return chosenNow;
+// }
 
 //make images appear
 function appearOnPage () {
-  var imagesToShow = getThree()
+  var imagesToShow = getThree();
   var leftPic = document.createElement('img');
   var midPic = document.createElement('img');
   var rightPic = document.createElement('img');
@@ -111,7 +168,7 @@ function appearOnPage () {
   leftPic.setAttribute('src', imagesToShow[0].path);
   rightPic.setAttribute('src', imagesToShow[1].path);
   midPic.setAttribute('src', imagesToShow[2].path);
-  console.log(imagesToShow)
+  console.log(imagesToShow);
   leftPic.setAttribute('id', imagesToShow[0].name);
   rightPic.setAttribute('id', imagesToShow[1].name);
   midPic.setAttribute('id', imagesToShow[2].name);
@@ -121,10 +178,11 @@ function appearOnPage () {
   grabContainer.appendChild(leftPic);
   grabContainer.appendChild(rightPic);
   grabContainer.appendChild(midPic);
-  }
-  console.log(imgs)
+}
 
 
+// appearOnPage();
+// action();
 
 //after the images appear, I want to get rid of them when they are chosen
 
@@ -183,27 +241,24 @@ function appearOnPage () {
 
 //Initiation of the game on page load
 
-appearOnPage();
-action();
 
-
-//this stuff has to come after we have cycled through the 25 times
-var clickNumbers = [banana.clicked, boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
+// //this stuff has to come after we have cycled through the 25 times
+// var clickNumbers = [banana.clicked, boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
 // , 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass']
 
 
-var ctx = document.getElementById('chart').getContext('2d');
-
-var myPieChart = new Chart(ctx,{
-  type: 'pie',
-  data: {
-    labels: ['banana', 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass'],
-    datasets: [{
-      label: 'How many clicks on each item?',
-      data: [15, 22, 12, 5],
-      backgroundColor: ['#EE3B3B', '#CD9B9B', '#FF7D40', '#A02422']
-    }],
-    options: { },
-  }
-}
-);
+// var ctx = document.getElementById('chart').getContext('2d');
+//
+// var myPieChart = new Chart(ctx,{
+//   type: 'pie',
+//   data: {
+//     labels: ['banana', 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass'],
+//     datasets: [{
+//       label: 'How many clicks on each item?',
+//       data: [15, 22, 12, 5],
+//       backgroundColor: ['#EE3B3B', '#CD9B9B', '#FF7D40', '#A02422']
+//     }],
+//     options: { },
+//   }
+// }
+// );
