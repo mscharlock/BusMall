@@ -2,3 +2,11 @@ img {
   width: 200px;
   float: left;
 }
+
+main {
+  margin: 40px;
+}
+
+div {
+  display: inline-block;
+}
