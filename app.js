@@ -50,6 +50,9 @@ ImageBuilder.prototype.clicks = function () {
   console.log('Times selected: ' + this.clicked);
 };
 
+
+var imgsToTheClicks = [];
+
 //on each ImageBuilder, have an event listener where it logs clicks
 function action() {
   var container = document.getElementById('container').childNodes;
@@ -63,6 +66,7 @@ function action() {
       for (var j = 0; j < imgs.length; j++) {
         if (imgs[j].name === targetId) {
           imgs[j].clicks();
+          imgsToTheClicks.push(imgs[j].clicks());
           console.log(imgs[j]);
         }
       }
@@ -122,7 +126,6 @@ function appearOnPage () {
   grabContainer.appendChild(midPic);
   }
   console.log(imgs)
-
 
 
 
@@ -186,14 +189,16 @@ function appearOnPage () {
 appearOnPage();
 action();
 
+console.log(imgsToTheClicks);
+
 var ctx = document.getElementById('chart').getContext('2d');
 
 var myPieChart = new Chart(ctx,{
   type: 'pie',
   data: {
-    labels: ['cats', 'dogs', 'fish', 'plants'],
+    labels: ['banana', 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass'],
     datasets: [{
-      label: 'How many were there?',
+      label: 'How many clicks on each item?',
       data: [15, 22, 12, 5],
       backgroundColor: ['#EE3B3B', '#CD9B9B', '#FF7D40', '#A02422']
     }],
