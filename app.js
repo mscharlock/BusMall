@@ -3,6 +3,7 @@
 var counter = 0;
 var prevImages = [];
 var chosenNow = [];
+var clickedArray = [];
 
 //constructor function
 function ImageBuilder(name, path) {
@@ -43,29 +44,46 @@ ImageBuilder.prototype.clicks = function () {
 //on each ImageBuilder, have an event listener where it logs clicks
 function clickingCount() {
   var container = document.getElementById('container').childNodes;
-  // for (var i = 0; i < container.length; i++){
+  for (var i = 0; i < container.length; i++){
 
-    container[0].addEventListener('click', function (event) {
-      console.log(event.target.id);
-      console.log("we selected the event target id")
+    container[i].addEventListener('click', function (event) {
       var targetId = event.target.id;
       for (var j = 0; j < imgs.length; j++) {
         if (imgs[j].name === targetId) {
           imgs[j].clicks();
         }
       }
-
-      clearPage();
-      console.log("clear")
-      prevImages.push(chosenNow[0,1,2]);
-      chosenNow = [];
-      getThree();
-      console.log("three")
-      appearOnPage();
-      console.log("page");
-      //mainLoop++;
+      if (counter <= 5) {
+        clearPage();
+        // console.log("clear")
+        prevImages = chosenNow;
+        chosenNow = [];
+        getThree();
+        // // console.log("three")
+        appearOnPage();
+        console.log('prevImages: '+ prevImages);
+        //mainLoop++;
+        clickingCount();
+      } else {
+        // boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
+        console.log('clickedArray:' + clickedArray);
+        clearPage();
+        renderResults();
+      }
       //console.log("mainloop" +mainLoop);
-    });}
+    });
+  }
+}
+
+var renderResults = function () {
+  var resultData = document.getElementById('results');
+  for (var i = 0; i < imgs.length; i++) {
+    var listItem = document.createElement('li');
+    listItem.innerHTML = imgs[i].name + ' had this many clicks: ' + imgs[i].clicked;
+    resultData.appendChild(listItem);
+  }
+};
+
 
       // clearPage();
       // getThree();
@@ -107,13 +125,12 @@ function clearPage () {
 function getThree() {
   counter++;
   while (chosenNow.length !== 3) {
-    // console.log(chosenNow);
-    console.log("we're in getthree")
+    // console.log("we're in getthree")
     var imgChoice = imgs[Math.floor(Math.random() * imgs.length)];
     if (chosenNow.includes(imgChoice) === false) {
       chosenNow.push(imgChoice);
     }
-    console.log(chosenNow);
+    console.log('ChosenNow at end of clearPage: ' +chosenNow);
   }
 }
 
@@ -152,18 +169,19 @@ function appearOnPage () {
 // }
 
 // runIt();
-
 getThree();
 appearOnPage();
-var mainLoop = 0;
-do {
-  mainLoop++;
-  clickingCount();
-  console.log(mainLoop);
-}
-while (mainLoop < 4);
+
+// do {
+//
+//
+clickingCount();
+//   console.log(counter);
+// } while (counter < 4);
 // //this stuff has to come after we have cycled through the 25 times
-// var clickNumbers = [banana.clicked, boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
+
+
+
 //
 //
 // // var ctx = document.getElementById('chart').getContext('2d');
