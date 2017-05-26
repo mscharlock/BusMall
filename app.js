@@ -32,7 +32,8 @@ var unicorn = new ImageBuilder('unicorn', './img/unicorn.jpg');
 var usb = new ImageBuilder('usb', './img/usb.gif');
 var watercan = new ImageBuilder('watercan', './img/water-can.jpg');
 var wineglass = new ImageBuilder('wineglass', './img/wine-glass.jpg');
-//I think we could probably make the ImageBuilder maker constructor use a function - like name = path.split(.jpg)[0]
+
+//Array of all of our images
 var imgs = [banana, boot, bag, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass];
 
 //this is our interior click counter
@@ -40,8 +41,7 @@ ImageBuilder.prototype.clicks = function () {
   this.clicked++;
 };
 
-//WORKING
-//on each ImageBuilder, have an event listener where it logs clicks
+//on each ImageBuilder, have an event listener where it logs clicks and repeats the
 function clickingCount() {
   var container = document.getElementById('container').childNodes;
   for (var i = 0; i < container.length; i++){
@@ -55,22 +55,17 @@ function clickingCount() {
       }
       if (counter <= 5) {
         clearPage();
-        // console.log("clear")
         prevImages = chosenNow;
         chosenNow = [];
         getThree();
-        // // console.log("three")
         appearOnPage();
         console.log('prevImages: '+ prevImages);
-        //mainLoop++;
         clickingCount();
       } else {
-        // boot.clicked, bag.clicked, breakfast.clicked, bubblegum.clicked, chair.clicked, cthulhu.clicked, dogduck.clicked, dragon.clicked, pen.clicked, petsweep.clicked, scissors.clicked, shark.clicked, sweep.clicked, tauntaun.clicked, unicorn.clicked, usb.clicked, watercan.clicked, wineglass.clicked];
         console.log('clickedArray:' + clickedArray);
         clearPage();
         renderResults();
       }
-      //console.log("mainloop" +mainLoop);
     });
   }
 }
@@ -84,39 +79,6 @@ var renderResults = function () {
   }
 };
 
-
-      // clearPage();
-      // getThree();
-      // console.log('Get three: ' + ChosenNow);
-      // appearOnPage();
-      // container[1].addEventListener('click', function (event) {
-      //   console.log(event.target.id);
-      //   console.log("we selected the event target id")
-      //   var targetId = event.target.id;
-      //   for (var j = 0; j < imgs.length; j++) {
-      //     if (imgs[j].name === targetId) {
-      //       imgs[j].clicks();
-      //     }
-      //   }
-      // }
-
-    //
-    // ),
-    //   container[2].addEventListener('click', function (event) {
-    //       console.log(event.target.id);
-    //       console.log("we selected the event target id")
-    //       var targetId = event.target.id;
-    //       for (var j = 0; j < imgs.length; j++) {
-    //         if (imgs[j].name === targetId) {
-    //           imgs[j].clicks();
-    //         }
-    //       }
-    //     })
-    // }
-
-
-
-
 function clearPage () {
   var container = document.getElementById('container');
   container.innerHTML = '';
@@ -125,7 +87,6 @@ function clearPage () {
 function getThree() {
   counter++;
   while (chosenNow.length !== 3) {
-    // console.log("we're in getthree")
     var imgChoice = imgs[Math.floor(Math.random() * imgs.length)];
     if (chosenNow.includes(imgChoice) === false) {
       chosenNow.push(imgChoice);
@@ -154,50 +115,7 @@ function appearOnPage () {
   grabContainer.appendChild(midPic);
 }
 
-// function runIt () {
-//   do {
-//     clearPage();
-//     console.log("clear page!")
-//     getThree();
-//     console.log("get three runs")
-//     appearOnPage();
-//     console.log("appear on page runs")
-//     clickingCount();
-//     console.log("clicking count runs")
-//   }
-//   while (counter < 4);
-// }
-
-// runIt();
+//initialize the site with first images
 getThree();
 appearOnPage();
-
-// do {
-//
-//
 clickingCount();
-//   console.log(counter);
-// } while (counter < 4);
-// //this stuff has to come after we have cycled through the 25 times
-
-
-
-//
-//
-// // var ctx = document.getElementById('chart').getContext('2d');
-// //
-// // var myPieChart = new Chart(ctx,{
-// //   type: 'pie',
-// //   data: {
-// //     labels: ['banana', 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass'],
-// //     datasets: [{
-// //       label: 'How many clicks on each item?',
-// //       data: [15, 22, 12, 5],
-// //       backgroundColor: ['#EE3B3B', '#CD9B9B', '#FF7D40', '#A02422']
-// //     }],
-// //     options: { },
-// //   }
-// // }
-// // );
-//
-// //
