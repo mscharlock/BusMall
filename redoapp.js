@@ -62,7 +62,7 @@ function clickingCount() {
           imgs[j].clicks();
         }
       }
-      if (counter <= 5) {
+      if (counter <= 25) {
         clearPage();
         prevImages = chosenNow;
         chosenNow = [];
@@ -159,3 +159,6 @@ function makeChart() {
   }
 )
 }
+
+
+//Note/attribution: to get the giveMeClicks to work, I ended up referring to what David did in his code.//
