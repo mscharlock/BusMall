@@ -9,6 +9,7 @@ var clickedArray = [];
 function ImageBuilder(name, path) {
   this.name = name;
   this.path = path;
+  this.shown = 0;
   this.clicked = 0;
 }
 
@@ -39,6 +40,10 @@ var imgs = [banana, boot, bag, breakfast, bubblegum, chair, cthulhu, dogduck, dr
 //this is our interior click counter
 ImageBuilder.prototype.clicks = function () {
   this.clicked++;
+};
+
+ImageBuilder.prototype.shown = function () {
+  this.shown++;
 };
 
 //on each ImageBuilder, have an event listener where it logs clicks and repeats the
@@ -88,9 +93,11 @@ function getThree() {
   counter++;
   while (chosenNow.length !== 3) {
     var imgChoice = imgs[Math.floor(Math.random() * imgs.length)];
-    if (chosenNow.includes(imgChoice) === false) {
-      chosenNow.push(imgChoice);
-    }
+    for (var i = 0; i < imgs.length; i++){
+      if (chosenNow.includes(imgChoice) === false || prevImages.includes(imgChoice) === false) {
+        chosenNow.push(imgChoice[i]);
+        imgChoice.shown++;
+      }}
     console.log('ChosenNow at end of clearPage: ' +chosenNow);
   }
 }
