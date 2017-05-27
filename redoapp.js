@@ -159,3 +159,6 @@ function makeChart() {
   }
 )
 }
+
+
+//Note/attribution: to get the giveMeClicks to work, I ended up referring to what David did in his code.//
