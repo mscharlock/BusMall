@@ -80,7 +80,7 @@ function clickingCount() {
         giveMeNames();
         var namesForStorage = JSON.stringify(imgNamesForChart);
         localStorage.imgNamesArr = namesForStorage;
-        renderResults();
+        // renderResults();
         makeChart();
       }
     });
@@ -138,15 +138,15 @@ function appearOnPage () {
   grabContainer.appendChild(rightPic);
   grabContainer.appendChild(midPic);
 }
-
-var renderResults = function () {
-  var resultData = document.getElementById('results');
-  for (var i = 0; i < imgs.length; i++) {
-    var listItem = document.createElement('li');
-    listItem.innerHTML = imgs[i].name + ' had this many clicks: ' + imgs[i].clicked + ' and was shown: ' + imgs[i].shown + ' times';
-    resultData.appendChild(listItem);
-  }
-};
+//
+// var renderResults = function () {
+//   var resultData = document.getElementById('results');
+//   for (var i = 0; i < imgs.length; i++) {
+//     var listItem = document.createElement('li');
+//     listItem.innerHTML = imgs[i].name + ' had this many clicks: ' + imgs[i].clicked + ' and was shown: ' + imgs[i].shown + ' times';
+//     resultData.appendChild(listItem);
+//   }
+// };
 
 //initialize the site with first images
 getThree();
