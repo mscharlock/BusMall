@@ -1,12 +1,91 @@
-img {
-  width: 200px;
-  float: left;
+* {
+  background-color: #FFF;
+  font-family: Arial, sans-serif;
 }
 
-main {
-  margin: 40px;
+body {
+  margin: 0 auto;
+  width: 1040px;
+  background-color: #FFF;
+  letter-spacing: normal;
+  line-height: normal;
+  font-family: Arial;
 }
+
+.discount {
+  padding: 20px;
+  background-color: #EE8F49;
+  color: #FFF;
+  letter-spacing: 4px;
+  line-height: 2em;
+  text-transform: uppercase;
+  font-family: arial;
+  position: relative;
+  text-align: center;
+}
+
+nav {
+  margin: 0 auto;
+  display: fixed;
+}
+
+ol {
+  text-align: bottom;
+}
+
+li {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px;
+  padding-top: 20px;
+  background-color: #D64609;
+  width: 110px;
+  font-family: arial;
+  margin-left: 10px;
+  color: #FFF;
+  width: 110px;
+  height: 90px;
+  text-align: center;
+}
+
+h1 {
+  color: orange;
+  font-family: 'Kingthings_Trypewriter_2-webfont', Arial, sans-serif;
+}
+
 
 div {
   display: inline-block;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+  float: left;
+  z-index: 0;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  border: white solid 1px;
+  display: fixed;
+}
+
+main {
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  padding: 30px;
+  color: #555;
+}
+
+p {
+  margin: 10px;
+}
+
+h2 {
+  font-family: Arial;
+  color: black;
 }

@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Kings Trypewriter';
+	src: url('Kingthings_Trypewriter_2-webfont.eot');
+	src: url('Kingthings_Trypewriter_2-webfont.eot?iefix') format('eot'),
+	     url('Kingthings_Trypewriter_2-webfont.woff') format('woff'),
+	     url('Kingthings_Trypewriter_2-webfont.ttf') format('truetype'),
+	     url('Kingthings_Trypewriter_2-webfont.svg#webfont') format('svg');
+}
