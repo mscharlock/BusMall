@@ -3,7 +3,7 @@
 var counter = 0;
 var prevImages = [];
 var chosenNow = [];
-var shownArray = [];
+var imgNamesForChart = [];
 var clickedItems = [];
 var canvas = document.getElementById('chart');
 var ctx = document.getElementById('chart').getContext('2d');
@@ -50,6 +50,7 @@ MakeImg.prototype.shown = function () {
   this.shown++;
 };
 
+
 //on a click, count up clicks
 function clickingCount() {
   var container = document.getElementById('container').childNodes;
@@ -62,7 +63,7 @@ function clickingCount() {
           imgs[j].clicks();
         }
       }
-      if (counter <= 5) {
+      if (counter <= 25) {
         clearPage();
         prevImages = chosenNow;
         chosenNow = [];
@@ -72,8 +73,13 @@ function clickingCount() {
         console.log('clicked array: ' + clickedItems);
       } else {
         console.log('clicked array: ' + clickedItems);
-        console.log('shown array: ' + shownArray);
         clearPage();
+        giveMeClicks();
+        var clicksForStorage = JSON.stringify(clickedItems);
+        localStorage.itemClicksArr = clicksForStorage;
+        giveMeNames();
+        var namesForStorage = JSON.stringify(imgNamesForChart);
+        localStorage.imgNamesArr = namesForStorage;
         renderResults();
         makeChart();
       }
@@ -82,11 +88,17 @@ function clickingCount() {
 }
 
 function giveMeClicks() {
-  var clickResults = [];
   for (var i = 0; i < imgs.length; i++) {
-    clickResults.push(imgs[i].clicked);
+    clickedItems.push(imgs[i].clicked);
   }
-  return clickResults;
+  return clickedItems;
+}
+
+function giveMeNames() {
+  for (var i = 0; i < imgs.length; i++) {
+    imgNamesForChart.push(imgs[i].name);
+  }
+  return imgNamesForChart;
 }
 
 //use global counter to ++, to show an image, make sure we didn't see it in chosen Now or prevImages, then if img appears, count up shown
@@ -100,7 +112,6 @@ function getThree() {
     }
   }
 }
-
 
 //clear page
 function clearPage () {
@@ -146,7 +157,7 @@ clickingCount();
 function makeChart() {
 
   var myPieChart = new Chart(ctx, {
-    type: 'pie',
+    type: 'bar',
     data: {
       labels: ['banana', 'boot', 'bag', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'watercan', 'wineglass'],
       datasets: [{
